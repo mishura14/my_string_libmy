@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,46 +7,66 @@
 typedef struct str
 {
     uint8_t* data;
-    uint8_t length;
-    uint8_t how_much;
+    size_t capasity;
+    size_t size;
 }str_t;
 
-str_t* string_create(uint8_t length)
+str_t* string_create(size_t capasity)
 {
-    str_t* string = malloc(sizeof(str_t));
-    string->data = malloc(length);
-    string->length = length;
-    string->how_much = 0;
+    str_t* string = malloc(sizeof *string);
+    if (!string) return NULL;
+    string->data = malloc(capasity + 1);
+    if (!string->data){
+        free(string);
+        return NULL;
+    }
+    string->capasity = capasity;
+    string->size = 0;
     return string;
 };
 void string_free(str_t* string){
+    if (!string) return;
     free(string->data);
     free(string);
 };
 
-uint8_t string_lengrh(str_t* string){
-    return string->length;
+size_t string_length(const str_t* string){
+    return string->size;
 };
-void string_print(str_t* string, FILE* file){
-    fwrite(string->data, sizeof(uint8_t), string->length, file);
+size_t string_print(const str_t* string, FILE* file){
+    fwrite(string->data, 1, string->size, file);
+    return string->size;
 }
 str_t* string_dup(const char *str){
-  str_t* string = string_create((uint8_t)strlen(str));
-  memcpy(string->data,str,string->length);
-  string->how_much = string->length;
-  return string;
+    size_t len = strlen(str);
+    str_t* string = string_create(len);
+    if (!string) return NULL;
+    memcpy(string->data,str, len);
+    string->size = len;
+    string ->data[len] = '\0';
+    return string;
 };
-str_t* string_concat(str_t* left, str_t* right){
-    str_t* string = string_create(left->length + right->length);
-    memcpy(string->data, left->data, left->length);
-    memcpy(string->data + left->length, right->data, right->length);
-    string->how_much = string->length;
+str_t* string_concat(const str_t* left,const str_t* right){
+    str_t* string = string_create(left->size + right->size);
+    if (!string)return NULL;
+    memcpy(string->data, left->data, left->size);
+    memcpy(string->data + left->size, right->data, right->size);
+    string->size = left->size + right->size;
+    string->data[string->size] = '\0';
     return string;
 }
-int main(){
-    str_t* string = string_dup("hellow world");
-    string_print(string, stdout);
-    fprintf(stdout, "\n length = %d", string_lengrh(string));
-    string_free(string);
+int main(void) {
+    str_t* s1 = string_dup("hello ");
+    str_t* s2 = string_dup("world");
+
+    str_t* s3 = string_concat(s1, s2);
+
+    string_print(s3, stdout);
+    printf("\nlength = %zu\n", string_length(s3));
+
+    string_free(s1);
+    string_free(s2);
+    string_free(s3);
+
     return 0;
 }
