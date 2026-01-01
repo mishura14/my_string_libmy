@@ -1,33 +1,35 @@
 
+# минимальная версия CMake
 cmake_minimum_required(VERSION 3.20)
-project(my_string C)
 
-# Устанавливаем стандарт C
+# имя проекта, язык и версия
+project(my_string VERSION 1.0.0 LANGUAGES C)
+
+# стандарт C
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-# Включаем предупреждения
-add_compile_options(-Wall -Wextra)
-
-# Пути к заголовочным файлам
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
-# Создание статической библиотеки
-add_library(my_string STATIC
+# ========== библиотека ==========
+add_library(my_string SHARED
     src/my_string.c
 )
 
-# Определяем исполняемый файл для тестов
-add_executable(tests_string
-    tests/test_string.c
+# путь к заголовкам
+target_include_directories(my_string PUBLIC
+    ${PROJECT_SOURCE_DIR}/include
 )
 
-# Линкуем библиотеку с тестами
-target_link_libraries(tests_string PRIVATE my_string)
+# версия библиотеки (для .so)
+set_target_properties(my_string PROPERTIES
+    VERSION ${PROJECT_VERSION}
+    SOVERSION 1
+)
 
-# Опционально: добавим цель для запуска тестов
-add_custom_target(run_tests
-    COMMAND tests_string
-    DEPENDS tests_string
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+# ========== тесты ==========
+add_executable(tests_string
+    tests/tests_string.c
+)
+
+target_link_libraries(tests_string PRIVATE
+    my_string
 )
