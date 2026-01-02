@@ -103,3 +103,25 @@ uint8_t* string_strpbrk(const str_t* strstr, const str_t* str){
     }
     return NULL;
 }
+//функция возвращет длину начального участка строки состаящего ез символов которые входят в другую строку
+
+size_t string_strcspn(const str_t* haystack, const str_t* reject)
+{
+    if (!haystack || !reject) return 0;
+    if (haystack->size == 0) return 0;
+    if (reject->size == 0) return haystack->size;
+
+    size_t len = 0;
+    for (size_t i = 0; i < haystack->size; i++) {
+        int found = 0;
+        for (size_t j = 0; j < reject->size; j++) {
+            if (haystack->data[i] == reject->data[j]) {
+                found = 1;
+                break;
+            }
+        }
+        if (found) return len;
+        len++;
+    }
+    return len;
+}

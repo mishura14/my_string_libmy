@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/mishura/ZedProject/myCpp/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

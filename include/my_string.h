@@ -38,3 +38,6 @@ uint8_t* string_strstr(const str_t* strstr, const str_t* str);
 
 //функия находит указатель на первый символ строки который совпадает одинм символов другой строки
 uint8_t* string_strpbrk(const str_t* strstr, const str_t* str);
+
+//функция возвращет длину начального участка строки состаящего ез символов которые входят в другую строку
+size_t string_strcspn(const str_t* strstr, const str_t* str);

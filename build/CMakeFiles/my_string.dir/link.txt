@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -shared -Wl,--dependency-file=CMakeFiles/my_string.dir/link.d -Wl,-soname,libmy_string.so.1 -o libmy_string.so.1.0.0 CMakeFiles/my_string.dir/src/my_string.c.o

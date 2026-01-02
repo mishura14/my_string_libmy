@@ -56,6 +56,18 @@ int main()
         printf("string_strpbrk found substring at index %ld\n", n - s_haystack->data);
     }
 
+    //функция возвращет длину начального участка строки состаящего ез символов которые не входят в другую строку
+
+    size_t len = string_strcspn(s_haystack, s_needle);
+
+    if (len == 2) {
+        printf("string_strcspn: first forbidden character at index %zu\n", len);
+    } else {
+        printf("FAIL: string_strcspn length = %zu\n", len);
+        return 1;
+    }
+
+
     // Освобождаем память
     string_free(s1);
     string_free(s2);
