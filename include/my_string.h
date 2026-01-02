@@ -32,3 +32,9 @@ str_t* string_dup(const char *str);
 
 // конкатенация строк
 str_t* string_concat(const str_t* left,const str_t* right);
+
+//функция нахождение первого вхождение подствроки в строке
+uint8_t* string_strstr(const str_t* strstr, const str_t* str);
+
+//функия находит указатель на первый символ строки который совпадает одинм символов другой строки
+uint8_t* string_strpbrk(const str_t* strstr, const str_t* str);

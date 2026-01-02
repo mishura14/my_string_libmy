@@ -34,10 +34,34 @@ int main()
     }
     printf("ALL TESTS PASSED\n");
 
+
+    // тест нахождение подстроки
+    str_t* s_haystack = string_dup("hello");
+    str_t* s_needle   = string_dup("lo");
+
+    uint8_t* pos = string_strstr(s_haystack, s_needle);
+    if (!pos) {
+        printf("FAIL: string_strstr did not find substring\n");
+        return 1;
+    } else {
+        printf("string_strstr found substring at index %ld\n", pos - s_haystack->data);
+    }
+
+    //тест функия находит указатель на первый символ строки который совпадает одинм символов другой строки
+    uint8_t* n = string_strpbrk(s_haystack, s_needle);
+    if (!n) {
+        printf("FAIL: string_strpbrk did not find substring\n");
+        return 1;
+    } else {
+        printf("string_strpbrk found substring at index %ld\n", n - s_haystack->data);
+    }
+
     // Освобождаем память
     string_free(s1);
     string_free(s2);
     string_free(s3);
+    string_free(s_haystack);
+    string_free(s_needle);
 
     return 0;
 

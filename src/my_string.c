@@ -73,3 +73,33 @@ str_t* string_concat(const str_t* left,const str_t* right){
     string->data[string->size] = '\0';
     return string;
 };
+//функция нахождение первого вхождение подствроки в строке
+uint8_t* string_strstr(const str_t* strstr, const str_t* str)
+{
+    if (!strstr || !str) return NULL;
+    if (str->size == 0) return NULL;
+
+    for(int i = 0; i <= strstr->size - str->size; i++){
+        int j = 0;
+        while(j < str->size && strstr->data[i + j] == str->data[j]){
+            j++;
+        }
+        if (j == str->size){
+            return strstr->data + i;
+        };
+    }
+    return NULL;
+};
+//функия находит указатель на первый символ строки который совпадает одинм символов другой строки
+uint8_t* string_strpbrk(const str_t* strstr, const str_t* str){
+    if (!strstr || !str) return NULL;
+    if (str->size == 0) return NULL;
+    for(size_t i = 0; i < strstr->size; i++){
+        for(size_t j = 0; j < str->size; j++){
+            if (strstr->data[i] == str->data[j]){
+                return strstr->data + i;
+            }
+        }
+    }
+    return NULL;
+}
