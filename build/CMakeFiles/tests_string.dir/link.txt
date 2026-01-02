@@ -1,1 +1,0 @@
-/usr/bin/cc -Wl,--dependency-file=CMakeFiles/tests_string.dir/link.d CMakeFiles/tests_string.dir/tests/tests_string.c.o -o tests_string  -Wl,-rpath,/home/mishura/ZedProject/myCpp/build libmy_string.so.1.0.0

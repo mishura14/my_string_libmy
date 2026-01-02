@@ -1,4 +1,0 @@
-/home/mishura/ZedProject/myCpp/build/CMakeFiles/my_string.dir
-/home/mishura/ZedProject/myCpp/build/CMakeFiles/tests_string.dir
-/home/mishura/ZedProject/myCpp/build/CMakeFiles/edit_cache.dir
-/home/mishura/ZedProject/myCpp/build/CMakeFiles/rebuild_cache.dir
