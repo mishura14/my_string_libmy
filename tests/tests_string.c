@@ -56,16 +56,24 @@ int main()
         printf("string_strpbrk found substring at index %ld\n", n - s_haystack->data);
     }
 
-    //функция возвращет длину начального участка строки состаящего ез символов которые не входят в другую строку
-
+    // string_strcspn
     size_t len = string_strcspn(s_haystack, s_needle);
-
     if (len == 2) {
         printf("string_strcspn: first forbidden character at index %zu\n", len);
     } else {
         printf("FAIL: string_strcspn length = %zu\n", len);
         return 1;
     }
+
+    // string_strspn
+    str_t* i = string_dup("hel");
+    size_t nel = string_strspn(s_haystack, i);
+    if (nel == 4) {
+        printf("string_strspn: initial segment length = %zu\n", nel);
+    } else {
+        printf("FAIL: string_strspn length = %zu\n", nel);
+        return 1;
+    };
 
 
     // Освобождаем память
