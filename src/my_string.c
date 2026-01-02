@@ -35,6 +35,19 @@ void string_free(str_t* string){
 size_t string_length(const str_t* string){
     return string->size;
 };
+//функция подсчета количества символов в строке
+size_t string_strlen(const char *s)
+{
+    if(s == NULL){
+        return 0;
+    };
+    size_t len = 0;
+    while (s[len] != '\0'){
+        len++;
+    };
+    return len;
+
+};
 // функция вывода строки
 size_t string_print(const str_t* string, FILE* file){
     fwrite(string->data, 1, string->size, file);
@@ -42,7 +55,7 @@ size_t string_print(const str_t* string, FILE* file){
 };
 // функция копирования строки
 str_t* string_dup(const char *str){
-    size_t len = strlen(str);
+    size_t len = string_strlen(str);
     str_t* string = string_create(len);
     if (!string) return NULL;
     memcpy(string->data,str, len);

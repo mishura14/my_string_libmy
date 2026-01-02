@@ -14,6 +14,10 @@ int main()
         printf("string length is not zero\n");
         return 1;
     }
+    if (string_strlen("hello") != 5){
+        printf("string length is not 5\n");
+        return 1;
+    }
 
     // Тест копирование строки
     str_t* s2 = string_dup("hello");

@@ -21,6 +21,9 @@ void string_free(str_t* string);
 // получение длины строки
 size_t string_length(const str_t* string);
 
+// получение длины строки
+size_t string_strlen(const char *s);
+
 // печать строки
 size_t string_print(const str_t* string, FILE* file);
 
